@@ -10,9 +10,9 @@ class UserViewing extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      welcomedUsers: null,
-      unverifiedUsers: null,
-      verifiedUsers: null,
+      welcomedUsers: undefined,
+      unverifiedUsers: undefined,
+      verifiedUsers: undefined,
     };
   }
 
@@ -46,16 +46,23 @@ class UserViewing extends Component {
         <Header />
         <div style={s.listsContainer}>
           <div style={s.userListContainer}>
-            <div style={s.userListHeader}>Welcomed Users</div>
+            <div style={s.userListHeader}>
+              Welcomed Users
+              {" - " +
+                (this.state.welcomedUsers !== undefined &&
+                  this.state.welcomedUsers.length)}
+            </div>
             <div>
               Users who have been welcomed but have not sent any commands
             </div>
             {this.state.welcomedUsers ? (
               this.state.welcomedUsers.map((user) => {
-                return <UserListItem userData={user} />;
+                return (
+                  <UserListItem userData={user} collection={"welcomedUsers"} />
+                );
               })
             ) : (
-              <div style={{ alignSelf: "center" }}>
+              <div style={s.icon}>
                 <Spinner />
               </div>
             )}
@@ -68,10 +75,15 @@ class UserViewing extends Component {
             </div>
             {this.state.unverifiedUsers ? (
               this.state.unverifiedUsers.map((user) => {
-                return <UserListItem userData={user} />;
+                return (
+                  <UserListItem
+                    userData={user}
+                    collection={"unverifiedUsers"}
+                  />
+                );
               })
             ) : (
-              <div style={{ alignSelf: "center" }}>
+              <div style={s.icon}>
                 <Spinner />
               </div>
             )}
@@ -81,10 +93,10 @@ class UserViewing extends Component {
             <div>Users who have been verified</div>
             {this.state.verifiedUsers ? (
               this.state.verifiedUsers.map((user) => {
-                return <UserListItem userData={user} />;
+                return <UserListItem userData={user} nonEditable={true} />;
               })
             ) : (
-              <div style={{ alignSelf: "center" }}>
+              <div style={s.icon}>
                 <Spinner />
               </div>
             )}
@@ -118,7 +130,7 @@ const s = {
     margin: 10,
     padding: 10,
     borderRadius: 5,
-    border: "1px solid black",
+    border: "1px solid lightgrey",
     backgroundColor: "white",
     boxShadow: "1px 1px 2px",
   },
@@ -126,7 +138,12 @@ const s = {
   userListHeader: {
     fontSize: 20,
     fontWeight: "bold",
-    margin: 10,
+    marginBottom: 10,
+  },
+
+  icon: {
+    alignSelf: "center",
+    margin: 20,
   },
 };
 
