@@ -1,25 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import UserViewing from "./pages/UserViewing";
+import UserVerification from "./pages/UserVerification";
+import { createBrowserHistory as createHistory } from "history";
+import { Route, HashRouter, Switch } from "react-router-dom";
+
+const history = createHistory();
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <HashRouter history={history}>
+      <Switch>
+        <Route exact path="/" component={UserViewing} />
+        <Route path="/userverification/" component={UserVerification} />
+      </Switch>
+    </HashRouter>
   );
 }
 
