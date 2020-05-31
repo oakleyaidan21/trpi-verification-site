@@ -78,14 +78,15 @@ class UserViewing extends Component {
                   {" - " + (this.state.unverifiedUsers.length - 1)}
                 </div>
                 <div>
-                  Users who have typed <b style={s.md}>!register</b> but have
-                  not continued in the process
+                  Users who have given the bot an email but have not continued
+                  in the process
                 </div>
                 {this.state.unverifiedUsers.map((user) => {
                   return (
                     <UserListItem
                       userData={user}
-                      collection={"welcomedUsers"}
+                      collection={"unverifiedUsers"}
+                      unverified={true}
                     />
                   );
                 })}
@@ -111,7 +112,8 @@ class UserViewing extends Component {
                   return (
                     <UserListItem
                       userData={user}
-                      collection={"welcomedUsers"}
+                      collection={"verifiedUsers"}
+                      nonEditable={true}
                     />
                   );
                 })}

@@ -16,7 +16,6 @@ class UserListItem extends Component {
    * from firebase
    */
   removeFromFirebase = () => {
-    console.log(this.props);
     const db = firebase.firestore();
     let remove = window.confirm("Remove this user from the table?");
     if (remove === true) {
@@ -65,6 +64,9 @@ class UserListItem extends Component {
               {data.username}
               {"#" + (data.discriminator !== null && data.discriminator)}
             </div>
+            {this.props.unverified && (
+              <div style={s.hashCode}>Code: {data.hashCode}</div>
+            )}
           </div>
           {this.state.showCommands && !this.props.nonEditable && (
             <div style={s.commands}>
@@ -136,6 +138,11 @@ const s = {
     justifyContent: "center",
     alignItems: "center",
     cursor: "pointer",
+  },
+
+  hashCode: {
+    fontSize: 15,
+    color: "lightgrey",
   },
 };
 
