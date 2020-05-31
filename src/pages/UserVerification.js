@@ -7,10 +7,13 @@ class UserVerification extends Component {
     this.state = {};
   }
   render() {
+    const id = this.props.match.params.id;
     return (
       <div style={s.mainContainer}>
         <Header />
-        <div style={s.pageContainer}>hi</div>
+        <div style={s.pageContainer}>
+          {id.length < 18 ? <div>FALSE</div> : <div>TRUE</div>}
+        </div>
       </div>
     );
   }

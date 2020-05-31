@@ -38,7 +38,9 @@ class UserListItem extends Component {
       data.avatar +
       ".png";
 
-    return (
+    return data.username === "none_test" ? (
+      <></>
+    ) : (
       <div
         style={s.mainContainer}
         onMouseEx

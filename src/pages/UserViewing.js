@@ -10,9 +10,9 @@ class UserViewing extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      welcomedUsers: undefined,
-      unverifiedUsers: undefined,
-      verifiedUsers: undefined,
+      welcomedUsers: null,
+      unverifiedUsers: null,
+      verifiedUsers: null,
     };
   }
 
@@ -46,21 +46,24 @@ class UserViewing extends Component {
         <Header />
         <div style={s.listsContainer}>
           <div style={s.userListContainer}>
-            <div style={s.userListHeader}>
-              Welcomed Users
-              {" - " +
-                (this.state.welcomedUsers !== undefined &&
-                  this.state.welcomedUsers.length)}
-            </div>
-            <div>
-              Users who have been welcomed but have not sent any commands
-            </div>
             {this.state.welcomedUsers ? (
-              this.state.welcomedUsers.map((user) => {
-                return (
-                  <UserListItem userData={user} collection={"welcomedUsers"} />
-                );
-              })
+              <>
+                <div style={s.userListHeader}>
+                  Welcomed Users
+                  {" - " + (this.state.welcomedUsers.length - 1)}
+                </div>
+                <div>
+                  Users who have been welcomed but have not sent any commands
+                </div>
+                {this.state.welcomedUsers.map((user) => {
+                  return (
+                    <UserListItem
+                      userData={user}
+                      collection={"welcomedUsers"}
+                    />
+                  );
+                })}
+              </>
             ) : (
               <div style={s.icon}>
                 <Spinner />
@@ -68,20 +71,25 @@ class UserViewing extends Component {
             )}
           </div>
           <div style={s.userListContainer}>
-            <div style={s.userListHeader}>Unverified Users</div>
-            <div>
-              Users who have sent "!register" but have not continued in the
-              process
-            </div>
             {this.state.unverifiedUsers ? (
-              this.state.unverifiedUsers.map((user) => {
-                return (
-                  <UserListItem
-                    userData={user}
-                    collection={"unverifiedUsers"}
-                  />
-                );
-              })
+              <>
+                <div style={s.userListHeader}>
+                  Unverified Users
+                  {" - " + (this.state.unverifiedUsers.length - 1)}
+                </div>
+                <div>
+                  Users who have typed <b style={s.md}>!register</b> but have
+                  not continued in the process
+                </div>
+                {this.state.unverifiedUsers.map((user) => {
+                  return (
+                    <UserListItem
+                      userData={user}
+                      collection={"welcomedUsers"}
+                    />
+                  );
+                })}
+              </>
             ) : (
               <div style={s.icon}>
                 <Spinner />
@@ -89,12 +97,25 @@ class UserViewing extends Component {
             )}
           </div>
           <div style={s.userListContainer}>
-            <div style={s.userListHeader}>Verified Users</div>
-            <div>Users who have been verified</div>
             {this.state.verifiedUsers ? (
-              this.state.verifiedUsers.map((user) => {
-                return <UserListItem userData={user} nonEditable={true} />;
-              })
+              <>
+                <div style={s.userListHeader}>
+                  Verified Users
+                  {" - " + (this.state.verifiedUsers.length - 1)}
+                </div>
+                <div>
+                  Verfied users with the <b style={s.md}>Student</b> tag in the
+                  discord
+                </div>
+                {this.state.verifiedUsers.map((user) => {
+                  return (
+                    <UserListItem
+                      userData={user}
+                      collection={"welcomedUsers"}
+                    />
+                  );
+                })}
+              </>
             ) : (
               <div style={s.icon}>
                 <Spinner />
@@ -144,6 +165,11 @@ const s = {
   icon: {
     alignSelf: "center",
     margin: 20,
+  },
+
+  md: {
+    backgroundColor: "lightgrey",
+    fontFamily: "Courier",
   },
 };
 

@@ -8,7 +8,15 @@ class Header extends Component {
   render() {
     return (
       <div style={s.mainContainer}>
-        <a href="#/userverification/">teamRPI</a>
+        <div style={s.title}>
+          <a
+            style={{ color: "inherit", textDecorationLine: "none" }}
+            href="https://discord.gg/vgMdEtf"
+            target="_blank"
+          >
+            teamRPI
+          </a>
+        </div>
       </div>
     );
   }
@@ -17,12 +25,17 @@ class Header extends Component {
 const s = {
   mainContainer: {
     width: "100%",
-    height: "50px",
     backgroundColor: "red",
     display: "flex",
     alignItems: "center",
     padding: 10,
     color: "white",
+  },
+  title: {
+    fontFamily: "Montserrat, sans-serif",
+    fontSize: 50,
+    fontWeight: "bold",
+    marginLeft: 10,
   },
 };
 

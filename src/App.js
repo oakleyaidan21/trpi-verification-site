@@ -13,7 +13,7 @@ function App() {
     <HashRouter history={history}>
       <Switch>
         <Route exact path="/" component={UserViewing} />
-        <Route path="/userverification/" component={UserVerification} />
+        <Route path="/userverification/:id" component={UserVerification} />
       </Switch>
     </HashRouter>
   );
